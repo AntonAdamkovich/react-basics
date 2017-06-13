@@ -19,4 +19,15 @@ module.exports = {
     plugins: [
         new WebpackNotifierPlugin({ title: 'Webpack' }),
     ],
+    devtool: 'cheap-source-map',
+    resolve: {
+        root: [
+            path.resolve(__dirname, 'src'),
+            path.resolve(__dirname, 'node_modules'),
+        ],
+        alias: {
+            '~': path.resolve(`${__dirname}/src/app/`),
+        },
+        extensions: ['', '.js'],
+    },
 };
