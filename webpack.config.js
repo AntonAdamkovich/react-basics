@@ -3,9 +3,10 @@ const path = require('path');
 const WebpackNotifierPlugin = require('webpack-notifier');
 const BrowserSyncPlugin = require('browser-sync-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const HTMLWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-    entry: './src/app/main.js',
+    entry: './src/app/main.jsx',
     output: {
         path: path.resolve(__dirname, 'dist'),
         filename: 'bundle.js',
@@ -40,6 +41,11 @@ module.exports = {
             debug: true,
         }),*/
         new ExtractTextPlugin('style.css'),
+        new HTMLWebpackPlugin({
+            inject: true,
+            template: './src/index-template.html',
+            filename: `${__dirname}/index.html`,
+        }),
     ],
     devtool: 'cheap-source-map',
     resolve: {
@@ -49,6 +55,7 @@ module.exports = {
         ],
         alias: {
             '~': path.resolve(__dirname, 'src', 'app'),
+            style: path.resolve(__dirname, 'src', 'style'),
         },
         extensions: ['.js', '.jsx'],
     },
