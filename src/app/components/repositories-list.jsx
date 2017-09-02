@@ -3,10 +3,10 @@ import PropTypes from 'prop-types';
 
 function RepositoriesList(props) {
     return (
-        <ul className={'repositories'}>
+        <ul className={'repositories-list'}>
             {props.repositories.map((rep, index) => (
                 <li key={rep.name}>
-                    <section>
+                    <section className={'repository'}>
                         <h1># {index + 1}</h1>
                         <figure>
                             <p>
@@ -24,9 +24,9 @@ function RepositoriesList(props) {
                             <figcaption>
                                 <h2>{rep.name}</h2>
                                 <h3>{rep.owner.login}</h3>
-                                <span>
-                                    {rep.stargazers_count}
-                                </span>
+                                <p>
+                                    stars: {rep.stargazers_count}
+                                </p>
                             </figcaption>
                         </figure>
                     </section>

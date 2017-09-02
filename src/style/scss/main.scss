@@ -1,6 +1,10 @@
+@import "variables";
+
 body {
-    background: orange;
+    background: $body-background-color;
     font-family: BlinkMacSystemFont;
+    margin: 0;
+    padding: 0;
 }
 
 ul {
@@ -12,7 +16,7 @@ li {
 }
 
 .container {
-    background-color: grey;
+    background-color: $container-background-color;
     max-width: 90%;
     margin: 0 auto;
 }
@@ -29,9 +33,46 @@ li {
 }
 
 .active {
-    color: #ff0000;
+    color: $active-links-color;
 }
 
-.repositories {
+.repositories-list {
+    margin: 0 2%;
+    display: grid;
+    grid-column-gap: 2%;
+    grid-template-columns: repeat(5, 18%);
+}
 
+.repository {
+    > figure {
+        margin: 0px;
+    }
+
+    h1, h2, h3, p {
+        text-align: center;
+    }
+
+    img {
+        width: 100%;
+    }
+}
+
+.navigation {
+    padding: 15px 0;
+    a {
+        margin: 0 15px;
+        text-decoration: none;
+
+        &:hover {
+            color: $active-links-color;
+        }
+    }
+}
+
+.placeholder {
+    height: $placeholder-heiht;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

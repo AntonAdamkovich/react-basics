@@ -1,40 +1,34 @@
 import React from 'react';
-
 import SelectLanguage from './select-language';
 import RepositoriesList from './repositories-list';
+import Placeholder from './placeholder';
 
 import LoadData from '~/utils/load-data';
 
 
 class Popular extends React.PureComponent {
-    constructor(props) {
-        super(props);
-        this.state = {
-            selectedLanguage: 'All',
-            repositories: null,
-        };
+    state = {
+        selectedLanguage: 'All',
+        repositories: null,
+    };
 
-        // this.updateLanguage = this.updateLanguage.bind(this);
+    componentDidMount() {
+        this.updateLanguage(this.state.selectedLanguage);
     }
 
-    async componentDidMount() {
-        await this.updateLanguage(this.state.selectedLanguage);
-    }
-
-    handleLanguageChanging = (event) => {
+    handleLanguageChange = (event) => {
         const target = event.nativeEvent.target;
         if (target.matches('li')) {
             this.updateLanguage(target.innerHTML);
         }
     }
 
-    updateLanguage(language) {
-        LoadData.fetchPopularRepositories(language).then((response) => {
-            return this.setState({
-                selectedLanguage: language,
-                repositories: response.items,
-            });
-        });
+    async updateLanguage(language) {
+        await LoadData.fetchPopularRepositories(language)
+        .then(response => this.setState({
+            selectedLanguage: language,
+            repositories: response.items,
+        }));
     }
 
     render() {
@@ -42,14 +36,14 @@ class Popular extends React.PureComponent {
         if (this.state.repositories !== null) {
             repList = <RepositoriesList repositories={this.state.repositories} />;
         } else {
-            repList = 'loading';
+            repList = <Placeholder />;
         }
 
         return (
             <div>
                 <SelectLanguage
                     selectedLanguage={this.state.selectedLanguage}
-                    updateLanguage={this.handleLanguageChanging}
+                    updateLanguage={this.handleLanguageChange}
                 />
                 {repList}
             </div>
